@@ -1,0 +1,30 @@
+﻿@model HelpDeskLogin.Models.comentarios
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>comentarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.comentario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DHComentario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DHComentario)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.idComentario">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

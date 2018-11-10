@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HelpDeskLogin.Models.grupos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.grupo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ativo)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.grupo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ativo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.idGrupo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.idGrupo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.idGrupo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

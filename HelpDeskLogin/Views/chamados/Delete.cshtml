@@ -1,0 +1,69 @@
+﻿@model HelpDeskLogin.Models.chamados
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>chamados</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DH_Abertura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DH_Abertura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DH_Fechamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DH_Fechamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.categorias)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.categorias.idCategoria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.comentarios)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.comentarios.idComentario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.grupos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.grupos.idGrupo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.logs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.logs.idLog)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridades)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.prioridades.idPrioridade)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="idChamado" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

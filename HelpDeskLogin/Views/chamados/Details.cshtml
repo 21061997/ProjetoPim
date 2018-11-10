@@ -1,0 +1,68 @@
+﻿@model HelpDeskLogin.Models.chamados
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>chamados</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DH_Abertura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DH_Abertura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DH_Fechamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DH_Fechamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.categorias)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.categorias.categoria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.comentarios)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.comentarios.comentario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.grupos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.grupos.grupo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.logs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.logs.Log)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridades)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.prioridades.prioridade)
+        </dd>
+        
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.idChamado">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

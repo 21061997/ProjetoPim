@@ -1,0 +1,81 @@
+﻿@model HelpDeskLogin.Models.chamados
+
+@{
+    ViewData["Title"] = "Create";
+    var sl = (SelectList)ViewBag.categoriasId;
+    var gp = (SelectList)ViewBag.gruposId;
+
+
+}
+
+<h2>Create</h2>
+
+<h4>chamados</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DH_Abertura" class="control-label"></label>
+                <input asp-for="DH_Abertura" class="form-control" />
+                <span asp-validation-for="DH_Abertura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DH_Fechamento" class="control-label"></label>
+                <input asp-for="DH_Fechamento" class="form-control" />
+                <span asp-validation-for="DH_Fechamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descricao" class="control-label"></label>
+                <input asp-for="descricao" class="form-control" />
+                <span asp-validation-for="descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="categoriasId" class="control-label"></label>
+                <select asp-for="categoriasId" class="form-control" asp-items="ViewBag.categoriasId"></select>
+
+                <span asp-validation-for="categoriasId" class="text-danger"></span>
+
+                @*@Html.DropDownListFor(model => model.categoriasId, sl)*@
+            </div>
+            <div class="form-group">s
+                <label asp-for="comentariosId" class="control-label"></label>
+                <select asp-for="comentariosId" class="form-control" asp-items="ViewBag.comentariosId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="logsId" class="control-label"></label>
+                <select asp-for="logsId" class="form-control" asp-items="ViewBag.logsId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="gruposId" class="control-label"></label>
+                <select asp-for="gruposId" class="form-control" asp-items="ViewBag.gruposId"></select>
+                @*@Html.DropDownListFor(model => model.gruposId, gp)*@
+
+                <span asp-validation-for="gruposId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prioridadesId" class="control-label"></label>
+                <select asp-for="prioridadesId" class="form-control" asp-items="ViewBag.prioridadesId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Arquivo" class="label"></label>
+                @Html.TextBoxFor(model => model.Arquivo, new { @class="form-control", required="required", type="file" })
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
