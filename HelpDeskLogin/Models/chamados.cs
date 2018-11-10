@@ -17,6 +17,8 @@ namespace HelpDeskLogin.Models
         public String descricao { get; set; }
         [NotMapped]
         public IFormFile Arquivo { get; set; }
+        public String Log { get; set; }
+
 
         /*Fazendo a associação de categorias*/
 
@@ -29,13 +31,7 @@ namespace HelpDeskLogin.Models
         public comentarios comentarios { get; set; }
 
 
-        /*Fazendo a associação de logs*/
-
-        public int logsId { get; set; }
-        public logs logs { get; set; }
-
-
-        /*Fazendo a associação de grupos*/
+               /*Fazendo a associação de grupos*/
 
         public int gruposId { get; set; }
         public grupos grupos { get; set; }
@@ -50,6 +46,10 @@ namespace HelpDeskLogin.Models
         /*Fazendo a associação de arquivos*/
 
         public ICollection<Arquivos> arquivos { get; set; }
+
+        /*Fazendo a associação de logs*/
+
+        public ICollection<logs> logs { get; set; } // Foi alteração no chamdosController, foi feito a referencia de log
 
 
 

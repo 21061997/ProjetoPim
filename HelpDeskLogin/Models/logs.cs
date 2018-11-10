@@ -12,9 +12,11 @@ namespace HelpDeskLogin.Models
         public int idLog { get; set; }
         public String Log { get; set; }
 
-        public ICollection<chamados> chamados { get; set; }
 
 
+
+        public int chamdosId { get; set; }
+        public chamados Chamados { get; set; }
 
 
 
