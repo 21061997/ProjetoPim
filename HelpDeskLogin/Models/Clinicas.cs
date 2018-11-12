@@ -17,7 +17,7 @@ namespace HelpDeskLogin.Models
         public string uf { get; set; }
         public string cidade { get; set; }
 
-
+        public ICollection<Usuario> Usuarios { get; set; }
 
 
     }

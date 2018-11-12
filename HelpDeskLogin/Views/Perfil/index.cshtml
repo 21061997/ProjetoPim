@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HelpDeskLogin.Models.Perfil>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DH_Criacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DH_Criacao)
+                </td>
+                <td>
+
+                    @if (item.Ativo == true)
+                    {
+                        <span class="label  label-success">Ativo</span>
+                    }
+                    else
+                    {
+                        <span class="label  label-danger">Destivado</span>
+                    }
+
+
+                </td>
+                <td>
+                    @if (item.Ativo == false)
+                    {
+                        <a class="btn btn-primary" asp-action="Ativar" asp-route-id="@item.Id">Ativar</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger" asp-action="Desativar" asp-route-id="@item.Id">Desativar</a>
+                    }
+
+                        <a class="btn btn-primary" asp-action="AdicionarUsuario" asp-route-id="@item.Id">Adicionar Usuario</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>

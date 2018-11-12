@@ -14,5 +14,7 @@ namespace HelpDeskLogin.Models
         public String descricao { get; set; }
         public bool ativo { get; set; }
 
+        public ICollection<Funcionario> Funcionarios { get; set; }
+
     }
 }

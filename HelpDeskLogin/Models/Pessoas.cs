@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Identity;
 namespace HelpDeskLogin.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class Pessoas : IdentityUser<int>
     {
         public string Nome { get; set; }
+
+        public ICollection<Usuario> Usuarios { get; set; }
+        public ICollection<Funcionario> Funcionarios { get; set; }
     }
 }
