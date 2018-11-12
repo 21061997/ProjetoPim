@@ -36,7 +36,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.prioridades)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.arquivos)
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -61,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.grupos.grupo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.logs.Log)
+                @Html.DisplayFor(modelItem => item.Log)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.prioridades.prioridade)

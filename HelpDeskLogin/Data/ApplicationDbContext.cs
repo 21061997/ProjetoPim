@@ -31,6 +31,7 @@ namespace HelpDeskLogin.Data
         public DbSet<comentarios> Comentarios { set; get; }
         public DbSet<chamados> Chamados { set; get; }
         public DbSet<Arquivos> Arquivos { set; get; }
+        public DbSet<Clinicas> Clinicas { set; get; }
 
 
 

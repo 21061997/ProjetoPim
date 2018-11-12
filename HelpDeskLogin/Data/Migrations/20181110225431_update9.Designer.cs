@@ -11,9 +11,10 @@ using System;
 namespace HelpDeskLogin.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181110225431_update9")]
+    partial class update9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,28 +142,6 @@ namespace HelpDeskLogin.Data.Migrations
                     b.HasIndex("prioridadesId");
 
                     b.ToTable("Chamados");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.Clinicas", b =>
-                {
-                    b.Property<int>("idClinica")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("bairro");
-
-                    b.Property<string>("cep");
-
-                    b.Property<string>("cidade");
-
-                    b.Property<string>("logradouro");
-
-                    b.Property<string>("telefone");
-
-                    b.Property<string>("uf");
-
-                    b.HasKey("idClinica");
-
-                    b.ToTable("Clinicas");
                 });
 
             modelBuilder.Entity("HelpDeskLogin.Models.comentarios", b =>
