@@ -33,9 +33,10 @@ namespace HelpDeskLogin.Controllers
                 throw new Exception("Model null");
 
             //var arquivo = Arquivos.Convert(model);
-            model.Arquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\arquivos", model.arquivo.FileName);// Caminho para alocação do arquivo.
+    
+            model.CaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\arquivos", model.arquivo.FileName);// Caminho para alocação do arquivo.
 
-            using (var stream = new FileStream(model.Arquivo, FileMode.Create))
+            using (var stream = new FileStream(model.CaminhoArquivo, FileMode.Create))
             {
 
                 model.arquivo.CopyTo(stream);
@@ -75,7 +76,7 @@ namespace HelpDeskLogin.Controllers
                 .Include(c => c.grupos)
                 .Include(c => c.logs)
                 .Include(c => c.prioridades)
-                .Include(c=> c.Arquivo)
+                .Include(c=> c.CaminhoArquivo)
                 .SingleOrDefaultAsync(m => m.idChamado == id);
             if (chamados == null)
             {

@@ -16,6 +16,10 @@ namespace HelpDeskLogin.Models
         public DateTime DH_Fechamento { get; set; }
         public String descricao { get; set; }
         [NotMapped]
+        public string arquivo { get; set; }
+        [NotMapped]
+        public string  CaminhoArquivo { get ; set ; }
+        [NotMapped]
         public IFormFile Arquivo { get; set; }
         public String Log { get; set; }
 
