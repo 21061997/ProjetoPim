@@ -15,8 +15,7 @@ namespace HelpDeskLogin.Models
         [NotMapped]
         public  IFormFile arquivo { get; set; }
         public string Arquivo { get; set; }
-        [NotMapped]
-        public string CaminhoArquivo { get; set; }
+        public string NomeArquivo { get; set; }
         public DateTime DH_Cadastro { get; set; }
 
         public int chamdosId { get; set; }

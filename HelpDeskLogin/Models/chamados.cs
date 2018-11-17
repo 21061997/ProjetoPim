@@ -56,6 +56,10 @@ namespace HelpDeskLogin.Models
         public ICollection<logs> logs { get; set; } // Foi alteração no chamdosController, foi feito a referencia de log
 
 
+        //Listas utilizadas apenas na view
+        [NotMapped]
+        public IEnumerable<Arquivos> ListaArquivos { get; set; }
+
 
 
 

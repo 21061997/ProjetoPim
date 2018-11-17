@@ -61,9 +61,11 @@
         <dt>
             @Html.DisplayNameFor(model => model.arquivos)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CaminhoArquivo)
-        </dd>
+        @foreach (var arquivo in Model.ListaArquivos)
+        {
+            @arquivo.NomeArquivo
+            <a href="@Url.Action("BaixarAnexo", "chamados", new { id = arquivo.idArquivo })" class="btn btn-xs btn-mini btn-primary"><i class="fa fa-download"></i> Baixar anexo</a>
+        }
 
     </dl>
 </div>

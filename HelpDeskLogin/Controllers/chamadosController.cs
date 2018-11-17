@@ -9,6 +9,8 @@ using HelpDeskLogin.Data;
 using HelpDeskLogin.Models;
 using System.IO;
 using System.Collections;
+using HelpDeskLogin.Util;
+using Microsoft.AspNetCore.Http;
 
 namespace HelpDeskLogin.Controllers
 {
@@ -20,40 +22,6 @@ namespace HelpDeskLogin.Controllers
         {
             _context = context;
         }
-
-        /*Salvando Arquivos*/
-
-            public IActionResult SalvarArquivo(Arquivos model)
-        {
-
-            if (!ModelState.IsValid)
-                return RedirectToAction("Index");// Fazendo a avalidação
-
-            if (model == null)
-                throw new Exception("Model null");
-
-            //var arquivo = Arquivos.Convert(model);
-    
-            model.CaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\arquivos", model.arquivo.FileName);// Caminho para alocação do arquivo.
-
-            using (var stream = new FileStream(model.CaminhoArquivo, FileMode.Create))
-            {
-
-                model.arquivo.CopyTo(stream);
-
-            }
-
-
-            _context.Add(model);
-            //await
-            _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-
-
-
-        }
-
-
 
         // GET: chamados
         public async Task<IActionResult> Index()
@@ -78,6 +46,10 @@ namespace HelpDeskLogin.Controllers
                 .Include(c => c.prioridades)
                 .Include(c=> c.arquivos)
                 .SingleOrDefaultAsync(m => m.idChamado == id);
+
+            var listaArquivos = await _context.Arquivos.Where(m => m.chamdosId == id).ToListAsync();
+            chamados.ListaArquivos = listaArquivos;
+
             if (chamados == null)
             {
                 return NotFound();
@@ -118,10 +90,16 @@ namespace HelpDeskLogin.Controllers
 
                 if (chamados.Arquivo != null)
                 {
+                    var retorno = Upload(chamados.Arquivo);
                     var arquivo = new Arquivos();
-                    arquivo.arquivo = chamados.Arquivo;
+                    arquivo.Arquivo = string.Format(@"{0}\{1}{2}", retorno.CaminhoDBArquivo, retorno.NomeArquivo, retorno.ExtensaoArquivo);
+                    arquivo.NomeArquivo = chamados.Arquivo.FileName;
+                    arquivo.DH_Cadastro = DateTime.Now;
                     arquivo.chamdosId = chamados.idChamado;
-                    SalvarArquivo(arquivo);
+
+                    //salva
+                    _context.Arquivos.Add(arquivo);
+                    await _context.SaveChangesAsync();
                 }
 
                 
@@ -244,6 +222,79 @@ namespace HelpDeskLogin.Controllers
         private bool chamadosExists(int id)
         {
             return _context.Chamados.Any(e => e.idChamado == id);
+        }
+
+        public IActionResult BaixarAnexo(int id)
+        {
+            var arquivos = _context.Arquivos.FirstOrDefault(m => m.idArquivo == id);
+
+            if (arquivos == null)
+                throw new Exception("Arquivo não localizado");
+
+            return BaixarArquivo(arquivos.Arquivo);
+        }
+
+        //metodo responsavel por fazer todo o tratamento do arquivo, copiar e retornoar o nome e caminho
+        public Arquivo Upload(IFormFile arquivo)
+        {
+            try
+            {
+                String ext = Path.GetExtension(arquivo.FileName);
+                string pathArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\arquivos");
+
+                pathArquivo = Path.Combine(pathArquivo, DateTime.Now.ToString("MMyyyy"));
+                if (!Directory.Exists(pathArquivo))
+                    Directory.CreateDirectory(pathArquivo);
+
+                var nomeArquivo = Guid.NewGuid().ToString().Replace("-", "_");
+
+                pathArquivo = string.Format(@"{0}\{1}{2}", pathArquivo, nomeArquivo, ext);
+
+                using (var stream = new FileStream(pathArquivo, FileMode.Create))
+                {
+                    arquivo.CopyTo(stream);
+                }
+
+                return new Arquivo()
+                {
+                    CaminhoCompletoArquivo = pathArquivo,
+                    CaminhoDBArquivo = DateTime.Now.ToString("MMyyyy"),
+                    NomeArquivo = nomeArquivo,
+                    ExtensaoArquivo = ext,
+                    FoiSalvoEmDisco = true
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format("Erro ao tentar realizar o upload do arquivo {0}", arquivo.FileName), e);
+            }
+        }
+
+
+        public IActionResult BaixarArquivo(string caminhoArquivo)
+        {
+            if (string.IsNullOrWhiteSpace(caminhoArquivo))
+            {
+                throw new Exception("Caminho do arquivo nulo!");
+            }
+
+            try
+            {
+                String pathArquivo = Path.Combine("wwwroot\\arquivos");
+                pathArquivo = Path.Combine(pathArquivo, caminhoArquivo);
+
+                byte[] stream = System.IO.File.ReadAllBytes(pathArquivo);
+                string mimeType = Arquivo.GetMimeType(pathArquivo);
+                string ext = Path.GetExtension(pathArquivo).ToLower();
+
+                var nomeArquivo = string.Format("Anexo_{0}{1}", DateTime.Now.ToString("dd_MM_yyyy"), ext);
+
+                return File(stream, mimeType, nomeArquivo);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format("Erro ao tentar baixar o arquivo"), e);
+            }
         }
     }
 }
