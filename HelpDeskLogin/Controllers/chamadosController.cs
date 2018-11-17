@@ -93,11 +93,13 @@ namespace HelpDeskLogin.Controllers
 
             ViewBag.categoriasId = new SelectList(_context.Categoria.ToList(), "idCategoria", "categoria");
             ViewBag.gruposId = new SelectList(_context.grupos.ToList(), "idGrupo", "grupo");
-             //ViewData["categoriasId"] = new SelectList(_context.Categoria, "idCategoria", "idCategoria");
+            ViewBag.prioridadesId = new SelectList(_context.Prioridades.ToList(), "idPrioridade", "prioridade");
+
+            //ViewData["categoriasId"] = new SelectList(_context.Categoria, "idCategoria", "idCategoria");
             ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario");
             //ViewData["gruposId"] = new SelectList(_context.grupos, "idGrupo", "idGrupo");
             ViewData["logsId"] = new SelectList(_context.Logs, "idLog", "idLog");
-            ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade");
+            //ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade");
             return View();
         }
 
@@ -156,10 +158,12 @@ namespace HelpDeskLogin.Controllers
             }
             ViewBag.categoriasId = new SelectList(_context.Categoria.ToList(), "idCategoria", "categoria", chamados.categoriasId);
             ViewBag.gruposId = new SelectList(_context.grupos.ToList(), "idGrupo", "grupo", chamados.gruposId);
+            ViewBag.prioridadesId = new SelectList(_context.Prioridades.ToList(), "idPrioridade", "prioridade", chamados.prioridadesId);
+
             ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario", chamados.comentarios);
             //ViewData["gruposId"] = new SelectList(_context.grupos.ToList(), "idGrupo", "grupos", chamados.gruposId);
             ViewData["logsId"] = new SelectList(_context.Logs, "idLog", "idLog", chamados.logs);
-            ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade", chamados.prioridadesId);
+            //ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade", chamados.prioridadesId);
             return View(chamados);
         }
 
