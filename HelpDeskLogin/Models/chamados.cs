@@ -22,6 +22,7 @@ namespace HelpDeskLogin.Models
         [NotMapped]
         public IFormFile Arquivo { get; set; }
         public String Log { get; set; }
+        public String comentario { get; set; }
 
 
         /*Fazendo a associação de categorias*/
@@ -31,11 +32,10 @@ namespace HelpDeskLogin.Models
 
         /*Fazendo a associação de comentarios*/
 
-        public int comentariosId { get; set; }
-        public comentarios comentarios { get; set; }
+        public ICollection<comentarios> comentarios { get; set; }
 
 
-               /*Fazendo a associação de grupos*/
+        /*Fazendo a associação de grupos*/
 
         public int gruposId { get; set; }
         public grupos grupos { get; set; }

@@ -156,7 +156,7 @@ namespace HelpDeskLogin.Controllers
             }
             ViewBag.categoriasId = new SelectList(_context.Categoria.ToList(), "idCategoria", "categoria", chamados.categoriasId);
             ViewBag.gruposId = new SelectList(_context.grupos.ToList(), "idGrupo", "grupo", chamados.gruposId);
-            ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario", chamados.comentariosId);
+            ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario", chamados.comentarios);
             //ViewData["gruposId"] = new SelectList(_context.grupos.ToList(), "idGrupo", "grupos", chamados.gruposId);
             ViewData["logsId"] = new SelectList(_context.Logs, "idLog", "idLog", chamados.logs);
             ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade", chamados.prioridadesId);
@@ -196,7 +196,7 @@ namespace HelpDeskLogin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["categoriasId"] = new SelectList(_context.Categoria, "idCategoria", "idCategoria", chamados.categoriasId);
-            ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario", chamados.comentariosId);
+            ViewData["comentariosId"] = new SelectList(_context.Comentarios, "idComentario", "idComentario", chamados.comentarios);
             ViewData["gruposId"] = new SelectList(_context.grupos, "idGrupo", "idGrupo", chamados.gruposId);
             ViewData["logsId"] = new SelectList(_context.Logs, "idLog", "idLog", chamados.logs);
             ViewData["prioridadesId"] = new SelectList(_context.Prioridades, "idPrioridade", "idPrioridade", chamados.prioridadesId);

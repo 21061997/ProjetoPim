@@ -14,7 +14,8 @@ namespace HelpDeskLogin.Models
         public String comentario { get; set; }
         public DateTime DHComentario { get; set; }
 
-        public ICollection<chamados> chamados { get; set; }
+        public int chamdosId { get; set; }
+        public chamados Chamados { get; set; }
 
 
     }
