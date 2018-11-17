@@ -69,14 +69,14 @@ namespace HelpDeskLogin.Controllers
             {
                 return NotFound();
             }
-
-            var chamados = await _context.Chamados
+            
+            var chamados = await _context.Chamados   
                 .Include(c => c.categorias)
                 .Include(c => c.comentarios)
                 .Include(c => c.grupos)
                 .Include(c => c.logs)
                 .Include(c => c.prioridades)
-                .Include(c=> c.CaminhoArquivo)
+                .Include(c=> c.arquivos)
                 .SingleOrDefaultAsync(m => m.idChamado == id);
             if (chamados == null)
             {
