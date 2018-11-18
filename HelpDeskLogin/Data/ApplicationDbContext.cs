@@ -41,7 +41,7 @@ namespace HelpDeskLogin.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
 
-            builder.Entity<Pessoas>().ToTable("User");
+            builder.Entity<Pessoas>().ToTable("Pessoa");
 
             builder.Entity<Perfil>().ToTable("Perfil");
 
@@ -72,6 +72,7 @@ namespace HelpDeskLogin.Data
         public DbSet<chamados> Chamados { set; get; }
         public DbSet<Arquivos> Arquivos { set; get; }
         public DbSet<Clinicas> Clinicas { set; get; }
+        public DbSet<Funcionario> Funcionario { get; set; }
 
 
 

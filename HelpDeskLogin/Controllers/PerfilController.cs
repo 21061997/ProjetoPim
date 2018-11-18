@@ -19,7 +19,7 @@ namespace HelpDeskLogin.Controllers
             _context = context;
         }
 
-        
+
 
         public IActionResult Index()
         {
@@ -56,10 +56,10 @@ namespace HelpDeskLogin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Perfil model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return Index();
 
-            var perfil = new Perfil {Name = model.Name, DH_Criacao = DateTime.Now, Ativo = model.Ativo};
+            var perfil = new Perfil { Name = model.Name, DH_Criacao = DateTime.Now, Ativo = model.Ativo, NormalizedName = model.Name.Normalize() };
 
             _context.Add(model);
             await _context.SaveChangesAsync();

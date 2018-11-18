@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HelpDeskLogin.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@ using HelpDeskLogin.Services;
 
 namespace HelpDeskLogin.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -24,17 +25,20 @@ namespace HelpDeskLogin.Controllers
         private readonly SignInManager<Pessoas> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<Pessoas> userManager,
             SignInManager<Pessoas> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
         }
 
         [TempData]
@@ -240,6 +244,71 @@ namespace HelpDeskLogin.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult CreateFuncionario(string returnUrl = null)
+
+
+
+
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            var model = new RegisterViewModel();
+            model.ListaGrupos = _context.grupos.AsQueryable().ToList();
+            model.ListaPerfil = _context.Roles.AsQueryable().ToList();
+
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateFuncionario(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new Pessoas { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
+                    //criar vinculo de pessoa com o perfil e salvar na tabela UserRole
+                    var userRole = new IdentityUserRole<int>();
+                    userRole.UserId = user.Id;
+                    userRole.RoleId = model.Perfil;
+                    await _context.UserRoles.AddAsync(userRole);
+
+                    //Salvar grupo e id pessoa na tabela funcionario
+                    var funcionario = new Funcionario();
+                    funcionario.GrupoId = model.GrupoId;
+                    funcionario.PessoaId = user.Id;
+                    await _context.Funcionario.AddAsync(funcionario);
+
+                    await _context.SaveChangesAsync();
+
+                    _logger.LogInformation("User created a new account with password.");
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,8 +18,11 @@ namespace HelpDeskLogin.Models
         public int GrupoId { get; set; }
         public grupos Grupos { get; set; }
 
+
         /*Fazendo a associação de pessoas*/
         public int PessoaId { get; set; }
         public Pessoas Pessoas { get; set; }
+
+
     }
 }
