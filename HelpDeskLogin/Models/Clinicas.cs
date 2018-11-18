@@ -10,6 +10,7 @@ namespace HelpDeskLogin.Models
     {
         [Key]
         public int idClinica { get; set; }
+        public string nome { get; set; }
         public string telefone { get; set; }
         public string cep { get; set; }
         public string logradouro { get; set; }

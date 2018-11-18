@@ -13,8 +13,8 @@
 
 <h2>Abra seu chamado</h2>
 @{ 
-<input type="button" value="+" onclick="fonte('a');"/>
-<input type="button" value="-" onclick="fonte('b');"/>
+<input type="button" class="btn btn-primary" value="+" onclick="fonte('a');"/>
+<input type="button" class="btn btn-primary" value="-" onclick="fonte('b');"/>
 <input type="hidden" id="backup"/>
 }
 
@@ -35,12 +35,12 @@
                     <span asp-validation-for="DH_Fechamento" class="text-danger"></span>
                 </div>*@
             <div class="form-group">
-                <label asp-for="descricao" class="control-label"></label>
+                <label asp-for="descricao" class="control-label">Descrição do Chamado</label>
                 <input asp-for="descricao" class="form-control" />
                 <span asp-validation-for="descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="categoriasId" class="control-label"></label>
+                <label asp-for="categoriasId" class="control-label">Categoria</label>
                 <select asp-for="categoriasId" class="form-control" asp-items="ViewBag.categoriasId"></select>
 
                 <span asp-validation-for="categoriasId" class="text-danger"></span>
@@ -57,14 +57,14 @@
                 @*<select asp-for="logsId" class="form-control" asp-items="ViewBag.logsId"></select>*@
             </div>
             <div class="form-group">
-                <label asp-for="gruposId" class="control-label"></label>
+                <label asp-for="gruposId" class="control-label"> Grupo</label>
                 <select asp-for="gruposId" class="form-control" asp-items="ViewBag.gruposId"></select>
                 @*@Html.DropDownListFor(model => model.gruposId, gp)*@
 
                 <span asp-validation-for="gruposId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="prioridadesId" class="control-label"></label>
+                <label asp-for="prioridadesId" class="control-label"> Prioridade</label>
                 <select asp-for="prioridadesId" class="form-control" asp-items="ViewBag.prioridadesId"></select>
             </div>
 
@@ -73,17 +73,16 @@
                 @Html.TextBoxFor(model => model.Arquivo, new { @class = "form-control", required = "required", type = "file" })
             </div>
 
-
-            <div class="form-group">
+             
+            <div class="form-group" id="conteudo">
                 <input type="submit" value="Abrir" class="btn btn-primary" />
+                <a asp-action="Index" value="Voltar" class="btn btn-default">Voltar a lista</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
 
