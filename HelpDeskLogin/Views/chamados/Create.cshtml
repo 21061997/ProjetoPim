@@ -1,4 +1,36 @@
-﻿@model HelpDeskLogin.Models.chamados
+﻿
+
+<script type="text/javascript">
+
+    /* Função para acessibilidade */
+    function fonte(e) {
+
+        var elemento = document.getElementById('conteudo');// Recebendo o Id da div
+        var atual = elemento.style.fontSize; // identificando a fonte
+        if (e == 'a') {
+
+            atual = parseInt(atual) + 2 + 'px'; // Calculo de tamanho de fonte
+        } else if (e == 'b') {
+
+
+        } else if (e == 'c') {
+
+
+        }
+        elemento.style.fontSize = atual;
+
+    }
+
+
+</script>
+
+
+
+
+
+
+
+@model HelpDeskLogin.Models.chamados
 
 @{
     ViewData["Title"] = "Create";
@@ -8,30 +40,47 @@
 
 }
 
+
+
+
 <h2>Abra seu chamado</h2>
+<input type="button" value="+" onclick="fonte('a')" />
+<input type="button" value="-" onclick="fonte('')" />
+<input type="button" value="100%" onclick="fonte('')" />
+<input type="hidden" id="backup" />
+
 
 <!--<h4>chamados</h4>-->
 <hr />
+
+<div id="conteudo">
+
+    <p>
+
+        Lorem Ipsum é Lorem Ipsum é simplesmente texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando uma impressora desconhecida pegou uma galé do tipo e subiu para fazer um livro de espécimes de tipo. Ele sobreviveu não apenas cinco séculos, mas também o salto para a composição eletrônica, permanecendo essencialmente inalterado. Foi popularizado nos anos 60 com o lançamento de folhas de Letraset contendo passagens de Lorem Ipsum, e mais recentemente com software de editoração eletrônica como Aldus PageMaker incluindo versões de Lorem Ipsum.simplesmente texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando uma impressora desconhecida pegou uma galé do tipo e subiu para fazer um livro de espécimes de tipo. Ele sobreviveu não apenas cinco séculos, mas também o salto para a composição eletrônica, permanecendo essencialmente inalterado. Foi popularizado nos anos 60 com o lançamento de folhas de Letraset contendo passagens de Lorem Ipsum, e mais recentemente com software de editoração eletrônica como Aldus PageMaker incluindo versões de Lorem Ipsum.
+    </p>
+</div>
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" id="conteudo">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
-                <label asp-for="DH_Abertura" class="control-label"></label>
-                <input asp-for="DH_Abertura" class="form-control" />
-                <span asp-validation-for="DH_Abertura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DH_Fechamento" class="control-label"></label>
-                <input asp-for="DH_Fechamento" class="form-control" />
-                <span asp-validation-for="DH_Fechamento" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
+                    <label asp-for="DH_Abertura" class="control-label"></label>
+                    <input asp-for="DH_Abertura" class="form-control" />
+                    <span asp-validation-for="DH_Abertura" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DH_Fechamento" class="control-label"></label>
+                    <input asp-for="DH_Fechamento" class="form-control" />
+                    <span asp-validation-for="DH_Fechamento" class="text-danger"></span>
+                </div>*@
+            <div class="form-group" id="conteudo">
                 <label asp-for="descricao" class="control-label"></label>
                 <input asp-for="descricao" class="form-control" />
                 <span asp-validation-for="descricao" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="conteudo">
                 <label asp-for="categoriasId" class="control-label"></label>
                 <select asp-for="categoriasId" class="form-control" asp-items="ViewBag.categoriasId"></select>
 
@@ -40,33 +89,33 @@
                 @*@Html.DropDownListFor(model => model.categoriasId, sl)*@
             </div>
             @*
-            <div class="form-group">s
-                <label asp-for="comentariosId" class="control-label"></label>
-                <select asp-for="comentariosId" class="form-control" asp-items="ViewBag.comentariosId"></select>
-            </div>*@
-            <div class="form-group">
+                <div class="form-group">s
+                    <label asp-for="comentariosId" class="control-label"></label>
+                    <select asp-for="comentariosId" class="form-control" asp-items="ViewBag.comentariosId"></select>
+                </div>*@
+            <div class="form-group" id="conteudo">
                 @*<label asp-for="logs" class="control-label"></label>*@
                 @*<select asp-for="logsId" class="form-control" asp-items="ViewBag.logsId"></select>*@
             </div>
-            <div class="form-group">
+            <div class="form-group" id="conteudo">
                 <label asp-for="gruposId" class="control-label"></label>
                 <select asp-for="gruposId" class="form-control" asp-items="ViewBag.gruposId"></select>
                 @*@Html.DropDownListFor(model => model.gruposId, gp)*@
 
                 <span asp-validation-for="gruposId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="conteudo">
                 <label asp-for="prioridadesId" class="control-label"></label>
                 <select asp-for="prioridadesId" class="form-control" asp-items="ViewBag.prioridadesId"></select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="conteudo">
                 <label asp-for="Arquivo" class="label"></label>
-                @Html.TextBoxFor(model => model.Arquivo, new { @class="form-control", required="required", type="file" })
+                @Html.TextBoxFor(model => model.Arquivo, new { @class = "form-control", required = "required", type = "file" })
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group" id="conteudo">
                 <input type="submit" value="Abrir" class="btn btn-primary" />
             </div>
         </form>
@@ -79,4 +128,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @{RenderSection("Scripts", required: false);}
+
+
 }
