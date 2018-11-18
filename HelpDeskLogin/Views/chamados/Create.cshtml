@@ -1,28 +1,6 @@
 ﻿
 
-<script type="text/javascript">
 
-    /* Função para acessibilidade */
-    function fonte(e) {
-
-        var elemento = document.getElementById('conteudo');// Recebendo o Id da div
-        var atual = elemento.style.fontSize; // identificando a fonte
-        if (e == 'a') {
-
-            atual = parseInt(atual) + 2 + 'px'; // Calculo de tamanho de fonte
-        } else if (e == 'b') {
-
-
-        } else if (e == 'c') {
-
-
-        }
-        elemento.style.fontSize = atual;
-
-    }
-
-
-</script>
 
 
 
@@ -127,9 +105,28 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    @{RenderSection("Scripts", required: false);}
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById('conteudo');// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 2 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
 
 
+            } else if (e == 'c') {
+
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
 }
