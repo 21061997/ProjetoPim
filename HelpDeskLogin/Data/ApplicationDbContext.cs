@@ -73,6 +73,7 @@ namespace HelpDeskLogin.Data
         public DbSet<Arquivos> Arquivos { set; get; }
         public DbSet<Clinicas> Clinicas { set; get; }
         public DbSet<Funcionario> Funcionario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
 
 

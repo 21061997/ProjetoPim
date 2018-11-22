@@ -247,16 +247,11 @@ namespace HelpDeskLogin.Controllers
 
         [HttpGet]
         public IActionResult CreateFuncionario(string returnUrl = null)
-
-
-
-
         {
             ViewData["ReturnUrl"] = returnUrl;
             var model = new RegisterViewModel();
             model.ListaGrupos = _context.grupos.AsQueryable().ToList();
             model.ListaPerfil = _context.Roles.AsQueryable().ToList();
-
 
 
             return View(model);
@@ -285,6 +280,62 @@ namespace HelpDeskLogin.Controllers
                     funcionario.GrupoId = model.GrupoId;
                     funcionario.PessoaId = user.Id;
                     await _context.Funcionario.AddAsync(funcionario);
+
+                    await _context.SaveChangesAsync();
+
+                    _logger.LogInformation("User created a new account with password.");
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateUsuario(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            var model = new RegisterViewModel();
+            model.ListaPerfil = _context.Roles.AsQueryable().ToList();
+            model.ListaClinicas = _context.Clinicas.AsQueryable().ToList();
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateUsuario(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new Pessoas { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
+                    //criar vinculo de pessoa com o perfil e salvar na tabela UserRole
+                    var userRole = new IdentityUserRole<int>();
+                    userRole.UserId = user.Id;
+                    userRole.RoleId = model.Perfil;
+                    await _context.UserRoles.AddAsync(userRole);
+
+                    //Salvar grupo e id pessoa na tabela funcionario
+                    var usuario = new Usuario();
+                    usuario.ClinicaId = model.GrupoId;
+                    usuario.PessoaId = user.Id;
+                    await _context.Usuario.AddAsync(usuario);
 
                     await _context.SaveChangesAsync();
 
