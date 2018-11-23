@@ -1,4 +1,6 @@
 ﻿@using HelpDeskLogin.Views.Manage
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @inject SignInManager<Pessoas> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

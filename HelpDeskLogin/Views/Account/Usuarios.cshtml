@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HelpDeskLogin.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    <a asp-action="CreateUsuario">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PessoaId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClinicaId)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PessoaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClinicaId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

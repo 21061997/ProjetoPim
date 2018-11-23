@@ -246,6 +246,7 @@ namespace HelpDeskLogin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateFuncionario(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -259,6 +260,7 @@ namespace HelpDeskLogin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateFuncionario(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -302,6 +304,7 @@ namespace HelpDeskLogin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateUsuario(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -315,6 +318,7 @@ namespace HelpDeskLogin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateUsuario(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
