@@ -1,0 +1,92 @@
+﻿@using HelpDeskLogin.Util
+@model HelpDeskLogin.Models.chamados
+
+
+@{
+    ViewData["Title"] = "Meus Chamados";
+}
+
+<h2>Meus Chamados</h2>
+
+<a asp-action="Create">Novo</a>
+
+<div class="col-md-12">
+
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a asp-action="Index">Todos Chamados</a></li>
+            <li><a asp-action="MeusChamadosTecnico">Meu Chamados (2)</a></li>
+            <li><a asp-action="ChamadosFechados">Chamados Finalizados</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DH_Abertura)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categorias)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.grupos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.prioridades)
+                    </th>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Tecnico
+                    </th>
+                    <th>
+                        Opções
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListaChamados)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DH_Abertura)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descricao)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
+                            <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+

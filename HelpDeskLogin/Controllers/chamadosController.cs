@@ -12,22 +12,25 @@ using System.Collections;
 using HelpDeskLogin.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace HelpDeskLogin.Controllers
 {
     public class chamadosController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Pessoas> _userManager;
 
-        public chamadosController(ApplicationDbContext context)
+        public chamadosController(ApplicationDbContext context, UserManager<Pessoas> usermanager)
         {
             _context = context;
+            _userManager = usermanager;
         }
 
         // GET: chamados
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Chamados.Include(c => c.categorias).Include(c => c.comentarios).Include(c => c.grupos).Include(c => c.logs).Include(c => c.prioridades);
+            var applicationDbContext = _context.Chamados.Where(x => x.DH_Fechamento == DateTime.MinValue);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -248,8 +251,34 @@ namespace HelpDeskLogin.Controllers
             _context.Chamados.Update(chamado);
             _context.SaveChangesAsync();
 
-
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MeusChamadosTecnico()
+        {
+            var userId = _userManager.GetUserId(User);
+            var funcionario = _context.Funcionario.FirstOrDefault(x => x.PessoaId == Int32.Parse(userId));
+
+            var chamados = _context.Chamados.Where(x => x.FuncionarioId == funcionario.IdFuncionario).AsQueryable();
+
+            var model = new chamados();
+            model.ListaChamados = chamados;
+
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> ChamadosFechados()
+        {
+
+            var chamados = _context.Chamados.Where(x => x.DH_Fechamento != DateTime.MinValue).AsQueryable();
+
+            var model = new chamados();
+            model.ListaChamados = chamados;
+
+
+            return View(model);
         }
 
 

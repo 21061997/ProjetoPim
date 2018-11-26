@@ -76,6 +76,8 @@ namespace HelpDeskLogin.Models
         //Listas utilizadas apenas na view
         [NotMapped]
         public IEnumerable<Arquivos> ListaArquivos { get; set; }
+        [NotMapped]
+        public IEnumerable<chamados> ListaChamados { get; set; }
 
 
 
