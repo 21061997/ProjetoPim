@@ -6,78 +6,83 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DH_Abertura)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DH_Fechamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.descricao)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.categorias)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.comentarios)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.grupos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.logs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.prioridades)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.arquivos)
+<a asp-action="Create">Novo</a>
 
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DH_Abertura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DH_Fechamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categorias.categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.comentarios)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.grupos.grupo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Log)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prioridades.prioridade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arquivo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.idChamado">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idChamado">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idChamado">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="col-md-12">
+    
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a asp-action="Index">Todos Chamados</a></li>
+            <li><a asp-action="Index">Meu Chamados (2)</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DH_Abertura)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categorias)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.grupos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.prioridades)
+                    </th>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Tecnico
+                    </th>
+                    <th>
+                        Opções
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DH_Abertura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.categorias.categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.grupos.grupo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prioridades.prioridade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UsuarioId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FuncionarioId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
+                        <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+

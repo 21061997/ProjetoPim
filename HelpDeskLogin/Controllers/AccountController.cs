@@ -337,7 +337,7 @@ namespace HelpDeskLogin.Controllers
 
                     //Salvar grupo e id pessoa na tabela funcionario
                     var usuario = new Usuario();
-                    usuario.ClinicaId = model.GrupoId;
+                    usuario.ClinicaId = model.ClinicaId;
                     usuario.PessoaId = user.Id;
                     await _context.Usuario.AddAsync(usuario);
 

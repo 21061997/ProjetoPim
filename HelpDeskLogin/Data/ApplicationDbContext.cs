@@ -41,6 +41,41 @@ namespace HelpDeskLogin.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
 
+            builder.Entity<Funcionario>()
+                .HasOne<Pessoas>(s => s.Pessoas)
+                .WithMany(g => g.Funcionarios)
+                .HasForeignKey(s => s.PessoaId);
+
+            builder.Entity<Funcionario>()
+                .HasOne<grupos>(s => s.Grupos)
+                .WithMany(g => g.Funcionarios)
+                .HasForeignKey(s => s.GrupoId);
+
+            builder.Entity<Usuario>()
+                .HasOne<Clinicas>(s => s.Clinicas)
+                .WithMany(g => g.Usuarios)
+                .HasForeignKey(s => s.ClinicaId);
+
+            builder.Entity<Usuario>()
+                .HasOne<Pessoas>(s => s.Pessoas)
+                .WithMany(g => g.Usuarios)
+                .HasForeignKey(s => s.PessoaId);
+
+            builder.Entity<comentarios>()
+                .HasOne<chamados>(s => s.Chamados)
+                .WithMany(g => g.comentarios)
+                .HasForeignKey(s => s.chamdosId);
+
+            builder.Entity<Arquivos>()
+                .HasOne<chamados>(s => s.Chamados)
+                .WithMany(g => g.arquivos)
+                .HasForeignKey(s => s.chamdosId);
+
+            builder.Entity<logs>()
+                .HasOne<chamados>(s => s.Chamados)
+                .WithMany(g => g.logs)
+                .HasForeignKey(s => s.chamdosId);
+
             builder.Entity<Pessoas>().ToTable("Pessoa");
 
             builder.Entity<Perfil>().ToTable("Perfil");
@@ -60,6 +95,7 @@ namespace HelpDeskLogin.Data
                 b.Property(au => au.Email)
                     .HasColumnName("EmailAddress");
             });
+            
 
         }
 

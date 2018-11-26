@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace HelpDeskLogin.Data.Migrations
+namespace HelpDeskLogin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181111235030_update10")]
-    partial class update10
+    [Migration("20181125014413_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,216 @@ namespace HelpDeskLogin.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HelpDeskLogin.Models.ApplicationUser", b =>
+            modelBuilder.Entity("HelpDeskLogin.Models.Arquivos", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("idArquivo")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Arquivo");
+
+                    b.Property<int?>("ChamadosidChamado");
+
+                    b.Property<DateTime>("DH_Cadastro");
+
+                    b.Property<string>("NomeArquivo");
+
+                    b.Property<int>("chamdosId");
+
+                    b.HasKey("idArquivo");
+
+                    b.HasIndex("ChamadosidChamado");
+
+                    b.ToTable("Arquivos");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.categorias", b =>
+                {
+                    b.Property<int>("idCategoria")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("ativo");
+
+                    b.Property<string>("categoria");
+
+                    b.Property<string>("descricao");
+
+                    b.HasKey("idCategoria");
+
+                    b.ToTable("Categoria");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.chamados", b =>
+                {
+                    b.Property<int>("idChamado")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DH_Abertura");
+
+                    b.Property<DateTime>("DH_Fechamento");
+
+                    b.Property<int>("FuncionarioId");
+
+                    b.Property<string>("Log");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.Property<int>("categoriasId");
+
+                    b.Property<string>("comentario");
+
+                    b.Property<string>("descricao");
+
+                    b.Property<int>("gruposId");
+
+                    b.Property<int>("prioridadesId");
+
+                    b.HasKey("idChamado");
+
+                    b.HasIndex("FuncionarioId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("categoriasId");
+
+                    b.HasIndex("gruposId");
+
+                    b.HasIndex("prioridadesId");
+
+                    b.ToTable("Chamados");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.Clinicas", b =>
+                {
+                    b.Property<int>("idClinica")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("bairro");
+
+                    b.Property<string>("cep");
+
+                    b.Property<string>("cidade");
+
+                    b.Property<string>("logradouro");
+
+                    b.Property<string>("nome");
+
+                    b.Property<string>("telefone");
+
+                    b.Property<string>("uf");
+
+                    b.HasKey("idClinica");
+
+                    b.ToTable("Clinicas");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.comentarios", b =>
+                {
+                    b.Property<int>("idComentario")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ChamadosidChamado");
+
+                    b.Property<DateTime>("DHComentario");
+
+                    b.Property<int>("chamdosId");
+
+                    b.Property<string>("comentario");
+
+                    b.HasKey("idComentario");
+
+                    b.HasIndex("ChamadosidChamado");
+
+                    b.ToTable("Comentarios");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.Funcionario", b =>
+                {
+                    b.Property<int>("IdFuncionario")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GrupoId");
+
+                    b.Property<int?>("GruposidGrupo");
+
+                    b.Property<int>("PessoaId");
+
+                    b.Property<int?>("PessoasId");
+
+                    b.HasKey("IdFuncionario");
+
+                    b.HasIndex("GruposidGrupo");
+
+                    b.HasIndex("PessoasId");
+
+                    b.ToTable("Funcionario");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.grupos", b =>
+                {
+                    b.Property<int>("idGrupo")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("ativo");
+
+                    b.Property<string>("descricao");
+
+                    b.Property<string>("grupo");
+
+                    b.HasKey("idGrupo");
+
+                    b.ToTable("grupos");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.logs", b =>
+                {
+                    b.Property<int>("idLog")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ChamadosidChamado");
+
+                    b.Property<string>("Log");
+
+                    b.Property<int>("chamdosId");
+
+                    b.HasKey("idLog");
+
+                    b.HasIndex("ChamadosidChamado");
+
+                    b.ToTable("Logs");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.Perfil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("DH_Criacao");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("Perfil");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.Pessoas", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -32,6 +239,7 @@ namespace HelpDeskLogin.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
+                        .HasColumnName("EmailAddress")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
@@ -71,147 +279,7 @@ namespace HelpDeskLogin.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.Arquivos", b =>
-                {
-                    b.Property<int>("idArquivo")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Arquivo");
-
-                    b.Property<int?>("ChamadosidChamado");
-
-                    b.Property<DateTime>("DH_Cadastro");
-
-                    b.Property<int>("chamdosId");
-
-                    b.HasKey("idArquivo");
-
-                    b.HasIndex("ChamadosidChamado");
-
-                    b.ToTable("Arquivos");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.categorias", b =>
-                {
-                    b.Property<int>("idCategoria")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("ativo");
-
-                    b.Property<string>("categoria");
-
-                    b.Property<string>("descricao");
-
-                    b.HasKey("idCategoria");
-
-                    b.ToTable("Categoria");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.chamados", b =>
-                {
-                    b.Property<int>("idChamado")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DH_Abertura");
-
-                    b.Property<DateTime>("DH_Fechamento");
-
-                    b.Property<string>("Log");
-
-                    b.Property<int>("categoriasId");
-
-                    b.Property<int>("comentariosId");
-
-                    b.Property<string>("descricao");
-
-                    b.Property<int>("gruposId");
-
-                    b.Property<int>("prioridadesId");
-
-                    b.HasKey("idChamado");
-
-                    b.HasIndex("categoriasId");
-
-                    b.HasIndex("comentariosId");
-
-                    b.HasIndex("gruposId");
-
-                    b.HasIndex("prioridadesId");
-
-                    b.ToTable("Chamados");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.Clinicas", b =>
-                {
-                    b.Property<int>("idClinica")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("bairro");
-
-                    b.Property<string>("cep");
-
-                    b.Property<string>("cidade");
-
-                    b.Property<string>("logradouro");
-
-                    b.Property<string>("telefone");
-
-                    b.Property<string>("uf");
-
-                    b.HasKey("idClinica");
-
-                    b.ToTable("Clinicas");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.comentarios", b =>
-                {
-                    b.Property<int>("idComentario")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DHComentario");
-
-                    b.Property<string>("comentario");
-
-                    b.HasKey("idComentario");
-
-                    b.ToTable("Comentarios");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.grupos", b =>
-                {
-                    b.Property<int>("idGrupo")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("ativo");
-
-                    b.Property<string>("descricao");
-
-                    b.Property<string>("grupo");
-
-                    b.HasKey("idGrupo");
-
-                    b.ToTable("grupos");
-                });
-
-            modelBuilder.Entity("HelpDeskLogin.Models.logs", b =>
-                {
-                    b.Property<int>("idLog")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ChamadosidChamado");
-
-                    b.Property<string>("Log");
-
-                    b.Property<int>("chamdosId");
-
-                    b.HasKey("idLog");
-
-                    b.HasIndex("ChamadosidChamado");
-
-                    b.ToTable("Logs");
+                    b.ToTable("Pessoa");
                 });
 
             modelBuilder.Entity("HelpDeskLogin.Models.prioridades", b =>
@@ -230,31 +298,29 @@ namespace HelpDeskLogin.Data.Migrations
                     b.ToTable("Prioridades");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("HelpDeskLogin.Models.Usuario", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<int>("ClinicaId");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
+                    b.Property<int?>("ClinicasidClinica");
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
+                    b.Property<int>("PessoaId");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("PessoasId");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                    b.HasKey("IdUsuario");
 
-                    b.ToTable("AspNetRoles");
+                    b.HasIndex("ClinicasidClinica");
+
+                    b.HasIndex("PessoasId");
+
+                    b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -263,17 +329,16 @@ namespace HelpDeskLogin.Data.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                    b.Property<int>("RoleId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("RoleClaim");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -282,17 +347,16 @@ namespace HelpDeskLogin.Data.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("UserClaim");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -300,32 +364,31 @@ namespace HelpDeskLogin.Data.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("UserLogin");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
-                    b.Property<string>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("UserRole");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -335,7 +398,7 @@ namespace HelpDeskLogin.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("UserToken");
                 });
 
             modelBuilder.Entity("HelpDeskLogin.Models.Arquivos", b =>
@@ -347,14 +410,19 @@ namespace HelpDeskLogin.Data.Migrations
 
             modelBuilder.Entity("HelpDeskLogin.Models.chamados", b =>
                 {
+                    b.HasOne("HelpDeskLogin.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HelpDeskLogin.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HelpDeskLogin.Models.categorias", "categorias")
                         .WithMany("chamados")
                         .HasForeignKey("categoriasId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("HelpDeskLogin.Models.comentarios", "comentarios")
-                        .WithMany("chamados")
-                        .HasForeignKey("comentariosId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HelpDeskLogin.Models.grupos", "grupos")
@@ -368,6 +436,24 @@ namespace HelpDeskLogin.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("HelpDeskLogin.Models.comentarios", b =>
+                {
+                    b.HasOne("HelpDeskLogin.Models.chamados", "Chamados")
+                        .WithMany("comentarios")
+                        .HasForeignKey("ChamadosidChamado");
+                });
+
+            modelBuilder.Entity("HelpDeskLogin.Models.Funcionario", b =>
+                {
+                    b.HasOne("HelpDeskLogin.Models.grupos", "Grupos")
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("GruposidGrupo");
+
+                    b.HasOne("HelpDeskLogin.Models.Pessoas", "Pessoas")
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("PessoasId");
+                });
+
             modelBuilder.Entity("HelpDeskLogin.Models.logs", b =>
                 {
                     b.HasOne("HelpDeskLogin.Models.chamados", "Chamados")
@@ -375,46 +461,57 @@ namespace HelpDeskLogin.Data.Migrations
                         .HasForeignKey("ChamadosidChamado");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("HelpDeskLogin.Models.Usuario", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("HelpDeskLogin.Models.Clinicas", "Clinicas")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("ClinicasidClinica");
+
+                    b.HasOne("HelpDeskLogin.Models.Pessoas", "Pessoas")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("PessoasId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("HelpDeskLogin.Models.Perfil")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("HelpDeskLogin.Models.ApplicationUser")
+                    b.HasOne("HelpDeskLogin.Models.Pessoas")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("HelpDeskLogin.Models.ApplicationUser")
+                    b.HasOne("HelpDeskLogin.Models.Pessoas")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("HelpDeskLogin.Models.Perfil")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HelpDeskLogin.Models.ApplicationUser")
+                    b.HasOne("HelpDeskLogin.Models.Pessoas")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("HelpDeskLogin.Models.ApplicationUser")
+                    b.HasOne("HelpDeskLogin.Models.Pessoas")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

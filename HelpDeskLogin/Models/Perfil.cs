@@ -22,4 +22,11 @@ namespace HelpDeskLogin.Models
         [Display(Name = "Status")]
         public Boolean Ativo { get; set; }
     }
+
+    public static class PerfilDefault
+    {
+        public const string PERFIL_DEFAULT = "Admin";
+        public const string PERFIL_USUARIO = "Usuarios";
+        public const string PERFIL_FUNCIONARIO = "Funcionarios";
+    }
 }

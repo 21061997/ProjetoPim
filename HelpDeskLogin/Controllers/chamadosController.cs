@@ -10,6 +10,7 @@ using HelpDeskLogin.Models;
 using System.IO;
 using System.Collections;
 using HelpDeskLogin.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
 namespace HelpDeskLogin.Controllers
@@ -59,6 +60,7 @@ namespace HelpDeskLogin.Controllers
         }
 
         // GET: chamados/Create
+        [Authorize]
         public IActionResult Create()
         {
 
@@ -78,12 +80,27 @@ namespace HelpDeskLogin.Controllers
         // POST: chamados/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //Abre chamado somente de usuarios
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("idChamado,DH_Abertura,DH_Fechamento,descricao,categoriasId,comentariosId,logsId,gruposId,prioridadesId,Arquivo")] chamados chamados)
         {
             if (ModelState.IsValid)
             {
+
+                //Se o chamdo for aberto pelo proprio usuario pega o id pelo usuario logado
+                if (chamados.UsuarioId == 0)
+                {
+                    //recupera usuario logado e busca no banco de dados
+                    var userName = User.Identity.Name;
+                    var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+                    var usuario = await _context.Usuario.FirstOrDefaultAsync(x => x.PessoaId == user.Id);
+                    chamados.UsuarioId = usuario.IdUsuario;
+                }
+                
+
+
                 chamados.DH_Abertura = DateTime.Now;
                 _context.Add(chamados);
                 await _context.SaveChangesAsync();
@@ -218,6 +235,23 @@ namespace HelpDeskLogin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> AssinarChamado(int id)
+        {
+            //recupera usuario logado e busca no banco de dados
+            var userName = User.Identity.Name;
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            var usuario = await _context.Funcionario.FirstOrDefaultAsync(x => x.PessoaId == user.Id);
+
+            var chamado = await _context.Chamados.FirstOrDefaultAsync(x => x.idChamado == id);
+            chamado.FuncionarioId = usuario.IdFuncionario;
+            _context.Chamados.Update(chamado);
+            _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         private bool chamadosExists(int id)
         {
