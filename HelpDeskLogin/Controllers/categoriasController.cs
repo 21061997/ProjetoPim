@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HelpDeskLogin.Data;
 using HelpDeskLogin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HelpDeskLogin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class categoriasController : Controller
     {
         private readonly ApplicationDbContext _context;

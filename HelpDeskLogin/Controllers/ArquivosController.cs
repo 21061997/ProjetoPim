@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HelpDeskLogin.Data;
 using HelpDeskLogin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HelpDeskLogin.Controllers
 {
+    [Authorize]
     public class ArquivosController : Controller
     {
         private readonly ApplicationDbContext _context;

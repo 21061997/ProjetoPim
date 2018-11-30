@@ -14,6 +14,37 @@
     <Compile Remove="Data\Migrations\20181109162841_update9.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\ExternalLoginViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\LoginViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\LoginWith2faViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\RegisterViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\AccountViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Arquivos.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\categorias.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\chamados.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Clinicas.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\comentarios.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ErrorViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Funcionario.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\grupos.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\logs.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\EnableAuthenticatorViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\ExternalLoginsViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\IndexViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\RemoveLoginViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\SetPasswordViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\ShowRecoveryCodesViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Perfil.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Pessoas.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\prioridades.cs" />
+    <Compile Include="..\..\ProjetoPim%2528Esse%2529\HelpDeskLogin\Services\Models\Usuario.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
