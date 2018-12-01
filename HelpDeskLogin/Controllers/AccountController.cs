@@ -82,7 +82,7 @@ namespace HelpDeskLogin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Usuario e/ou senha invalido.");
                     return View(model);
                 }
             }
@@ -266,7 +266,7 @@ namespace HelpDeskLogin.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new Pessoas { UserName = model.Email, Email = model.Email };
+                var user = new Pessoas { UserName = model.Email, Email = model.Email, Nome = model.Name };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -324,7 +324,7 @@ namespace HelpDeskLogin.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new Pessoas { UserName = model.Email, Email = model.Email };
+                var user = new Pessoas { UserName = model.Email, Email = model.Email, Nome = model.Name};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

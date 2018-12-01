@@ -30,8 +30,12 @@ namespace HelpDeskLogin.Controllers
         // GET: chamados
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Chamados.Where(x => x.DH_Fechamento == DateTime.MinValue);
-            return View(await applicationDbContext.ToListAsync());
+            var chamadosAbertos = _context.Chamados.Where(x => x.DH_Fechamento == DateTime.MinValue);
+            var model = new chamados();
+
+            model.ListaChamados = chamadosAbertos;
+
+            return View(model);
         }
 
         // GET: chamados/Details/5

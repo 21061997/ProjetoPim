@@ -72,6 +72,10 @@ namespace HelpDeskLogin.Util
 
         public static string RecuperarNomeFuncionario(int? idUsuario)
         {
+            if (idUsuario == null)
+            {
+                return " - ";
+            }
             var context = new ApplicationDbContext();
             var funcionario = context.Funcionario.FirstOrDefault(x => x.IdFuncionario == idUsuario);
 
