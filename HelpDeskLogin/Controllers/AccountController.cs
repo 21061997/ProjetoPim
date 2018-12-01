@@ -351,7 +351,7 @@ namespace HelpDeskLogin.Controllers
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return CreateUsuario();
                 }
                 AddErrors(result);
             }
