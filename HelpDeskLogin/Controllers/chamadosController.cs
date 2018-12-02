@@ -253,7 +253,7 @@ namespace HelpDeskLogin.Controllers
             var chamado = await _context.Chamados.FirstOrDefaultAsync(x => x.idChamado == id);
             chamado.FuncionarioId = usuario.IdFuncionario;
             _context.Chamados.Update(chamado);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
