@@ -54,7 +54,7 @@ namespace HelpDeskLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idClinica,telefone,cep,logradouro,bairro,uf,cidade")] Clinicas clinicas)
+        public async Task<IActionResult> Create([Bind("idClinica,telefone,cep,logradouro,bairro,uf,cidade,nome")] Clinicas clinicas)
         {
             if (ModelState.IsValid)
             {

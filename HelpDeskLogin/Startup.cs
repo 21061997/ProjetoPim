@@ -38,6 +38,8 @@ namespace HelpDeskLogin
                 .AddDefaultTokenProviders();
 
 
+
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 

@@ -39,12 +39,12 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Perfil)
-                @Html.DropDownListFor(model => model.Perfil, new SelectList(Model.ListaPerfil, "Id", "Name"), "Selecione o perfil", new { @class = "form-control", required = "required" })
+                <dropdrown-perfil asp-for="Perfil" id="Perfil" name="Perfil"></dropdrown-perfil>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.GrupoId)
-                @Html.DropDownListFor(model => model.GrupoId, new SelectList(Model.ListaGrupos, "idGrupo", "grupo"), "Selecione o Grupo", new { @class = "form-control", required = "required" })
+                <dropdrown-grupo  asp-for="GrupoId" id="GrupoId" name="GrupoId"></dropdrown-grupo>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">

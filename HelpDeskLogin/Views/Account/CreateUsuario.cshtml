@@ -1,5 +1,4 @@
 ﻿@model HelpDeskLogin.Models.AccountViewModels.RegisterViewModel
-
 @{
     ViewData["Title"] = "Create Usuario";
 }
@@ -47,14 +46,16 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Perfil)
-                @Html.DropDownListFor(model => model.Perfil, new SelectList(Model.ListaPerfil, "Id", "Name"), "Selecione o perfil", new { @class = "form-control", required = "required" })
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <dropdrown-perfil asp-for="Perfil" id="Perfil" name="Perfil"></dropdrown-perfil>
+                <span asp-validation-for="Perfil" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.ClinicaId)
-                @Html.DropDownListFor(model => model.ClinicaId, new SelectList(Model.ListaClinicas, "idClinica", "cidade"), "Selecione a clinica", new { @class = "form-control", required = "required" })
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <dropdrown-clinica asp-for="ClinicaId" id="ClinicaId" name="ClinicaId"></dropdrown-clinica>
+                <span asp-validation-for="ClinicaId" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

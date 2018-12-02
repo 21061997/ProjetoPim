@@ -298,6 +298,10 @@ namespace HelpDeskLogin.Controllers
                 AddErrors(result);
             }
 
+            //recupera dados necessarios para montar a view
+            model.ListaGrupos = _context.grupos.AsQueryable().ToList();
+            model.ListaPerfil = _context.Roles.AsQueryable().ToList();
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -355,6 +359,10 @@ namespace HelpDeskLogin.Controllers
                 }
                 AddErrors(result);
             }
+
+            //recupera dados necessarios para montar a view
+            model.ListaGrupos = _context.grupos.AsQueryable().ToList();
+            model.ListaPerfil = _context.Roles.AsQueryable().ToList();
 
             // If we got this far, something failed, redisplay form
             return View(model);

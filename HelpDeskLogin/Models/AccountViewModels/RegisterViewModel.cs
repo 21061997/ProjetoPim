@@ -37,6 +37,7 @@ namespace HelpDeskLogin.Models.AccountViewModels
         public IEnumerable<Perfil> ListaPerfil { get; set; }
         public int GrupoId { get; set; }
         public IEnumerable<grupos> ListaGrupos { get; set; }
+        [Display(Name = "Clinica")]
         public int ClinicaId { get; set; }
         public IEnumerable<Clinicas> ListaClinicas { get; set; }
     }
