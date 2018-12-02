@@ -97,18 +97,15 @@ namespace HelpDeskLogin.Util
             {
                 return "-";
             }
-
-
             var context = new ApplicationDbContext();
-            var clinicas = context.Clinicas.FirstOrDefault(x => x.idClinica == idUsuario );
-
-            var clinica = context.Users.FirstOrDefault(x => x.Id == clinicas.idClinica);
-
+            //recuperar primeiro o usuario em si
+            var usuario = context.Usuario.FirstOrDefault(x => x.IdUsuario == idUsuario);
+            //recupera a clinica
+            var clinica = context.Clinicas.FirstOrDefault(x => x.idClinica == usuario.ClinicaId );
             if (clinica != null)
             {
-                return clinica.Nome;
+                return clinica.nome;
             }
-
             return "-";
         }
 
