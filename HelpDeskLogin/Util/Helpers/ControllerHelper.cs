@@ -88,5 +88,34 @@ namespace HelpDeskLogin.Util
 
             return " - ";
         }
+
+
+        public static string RecuperaNomeClinica(int? idUsuario)
+        {
+
+            if(idUsuario == null)
+            {
+                return "-";
+            }
+
+
+            var context = new ApplicationDbContext();
+            var clinicas = context.Clinicas.FirstOrDefault(x => x.idClinica == idUsuario );
+
+            var clinica = context.Users.FirstOrDefault(x => x.Id == clinicas.idClinica);
+
+            if (clinica != null)
+            {
+                return clinica.Nome;
+            }
+
+            return "-";
+        }
+
+
+
+
+
+
     }
 }
