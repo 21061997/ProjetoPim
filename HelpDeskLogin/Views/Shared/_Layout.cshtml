@@ -15,7 +15,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-</head>
+</head><br />
 <body> 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -31,16 +31,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>
-                    <li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>
-                    <li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>
-                    <li><a asp-area="" asp-controller="logs" asp-action="">logs</a></li>
-                    <li><a asp-area="" asp-controller="comentarios" asp-action="">comentarios</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contatos</a></li>
+                    <!--<li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>-->
+                    <!--<li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>-->
+                    <!--<li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>-->
+                    <!--<li><a asp-area="" asp-controller="logs" asp-action="">logs</a></li>-->
+                    <!--<li><a asp-area="" asp-controller="comentarios" asp-action="">comentarios</a></li>-->
                     <li><a asp-area="" asp-controller="chamados" asp-action="">chamados</a></li>
-                    <li><a asp-area="" asp-controller="Arquivos" asp-action="">Arquivos</a></li>
-                    <li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>
+                    <!--<li><a asp-area="" asp-controller="Arquivos" asp-action="">Arquivos</a></li>-->
+                    <!--<li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>-->
                 </ul>
                 @await Html.PartialAsync("_LoginPartial");
             </div>
