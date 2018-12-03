@@ -9,6 +9,7 @@ using HelpDeskLogin.Data;
 using HelpDeskLogin.Models;
 using System.IO;
 using System.Collections;
+using HelpDeskLogin.Models.Enum;
 using HelpDeskLogin.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -126,7 +127,15 @@ namespace HelpDeskLogin.Controllers
                     await _context.SaveChangesAsync();
                 }
 
-                
+                //registra log da alteração
+                logsController logs = new logsController(_context);
+                var log = new logs();
+                log.IdUsuario = chamados.UsuarioId;
+                log.Tipo = TipoLogEnum.AssinarChamado;
+                log.chamdosId = chamados.idChamado;
+                logs.SalvarLog(log);
+
+
 
 
                 return RedirectToAction(nameof(Index));
@@ -254,6 +263,14 @@ namespace HelpDeskLogin.Controllers
             chamado.FuncionarioId = usuario.IdFuncionario;
             _context.Chamados.Update(chamado);
             _context.SaveChanges();
+
+            //registra log da alteração
+            logsController logs = new logsController(_context);
+            var log = new logs();
+            log.IdUsuario = usuario.IdFuncionario;
+            log.Tipo = TipoLogEnum.AssinarChamado;
+            log.chamdosId = chamado.idChamado;
+            logs.SalvarLog(log);
 
             return RedirectToAction(nameof(Index));
         }

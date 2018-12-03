@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelpDeskLogin.Data;
+using HelpDeskLogin.Models;
 
 namespace HelpDeskLogin.Util
 {
@@ -107,6 +108,36 @@ namespace HelpDeskLogin.Util
                 return clinica.nome;
             }
             return "-";
+        }
+
+
+        public static string RecuperarNomePessoa(int? idUsuario)
+        {
+            var pessoa = new Pessoas();
+            if (idUsuario == null)
+            {
+                return " - ";
+            }
+            var context = new ApplicationDbContext();
+            //tenta recuperar primeiro na tabela funcionarios 
+            var funcionario = context.Funcionario.FirstOrDefault(x => x.IdFuncionario == idUsuario);
+            //se não encontrar procura na tabela de usuarios
+            if (funcionario == null)
+            {
+               var usuario = context.Usuario.FirstOrDefault(x => x.IdUsuario == idUsuario);
+               pessoa = context.Users.FirstOrDefault(x => x.Id == usuario.PessoaId);
+            }
+            else
+            {
+                pessoa = context.Users.FirstOrDefault(x => x.Id == funcionario.PessoaId);
+            }
+            
+            if (pessoa != null)
+            {
+                return pessoa.Nome;
+            }
+
+            return " - ";
         }
 
 

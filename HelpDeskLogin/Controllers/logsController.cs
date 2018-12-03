@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HelpDeskLogin.Data;
 using HelpDeskLogin.Models;
+using HelpDeskLogin.Models.Enum;
+using HelpDeskLogin.Util;
 
 namespace HelpDeskLogin.Controllers
 {
@@ -54,16 +56,36 @@ namespace HelpDeskLogin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idLog,Log")] logs logs)
+        public async Task<IActionResult> Create(logs logs)
         {
             if (ModelState.IsValid)
             {
+                var email = ControllerHelper.RecuperarNomePessoa(logs.IdUsuario);
+
+                //monta log
+                var log = string.Format("{0} : {1} em {2}", email, logs.Tipo, DateTime.Now);
+
+                logs.Log = log;
+
                 _context.Add(logs);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
             return View(logs);
         }
+
+        public void SalvarLog(logs log)
+        {
+            var email = ControllerHelper.RecuperarNomePessoa(log.IdUsuario);
+
+            //monta log
+            var logText = string.Format("{0} : {1} em {2}", email, log.Tipo, DateTime.Now);
+
+            log.Log = logText;
+
+            _context.Add(log);
+            _context.SaveChanges();
+        }
+
 
         // GET: logs/Edit/5
         public async Task<IActionResult> Edit(int? id)
