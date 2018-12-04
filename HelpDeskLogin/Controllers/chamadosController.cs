@@ -131,7 +131,7 @@ namespace HelpDeskLogin.Controllers
                 logsController logs = new logsController(_context);
                 var log = new logs();
                 log.IdUsuario = chamados.UsuarioId;
-                log.Tipo = TipoLogEnum.AssinarChamado;
+                log.Tipo = TipoLogEnum.Criacao;
                 log.chamdosId = chamados.idChamado;
                 logs.SalvarLog(log);
 
@@ -274,6 +274,26 @@ namespace HelpDeskLogin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AlterarGrupo(chamados chamado)
+        {
+            //validar isso direito, essa validação ta mal feita pra caraca
+            if (chamado.idChamado == 0)
+            {
+                return null;
+            }
+
+            var chamadoBanco = _context.Chamados.FirstOrDefault(x => x.idChamado == chamado.idChamado);
+            var grupo = _context.grupos.FirstOrDefault(x => x.idGrupo == chamado.gruposId);
+
+            chamadoBanco.gruposId = grupo.idGrupo;
+            _context.Chamados.Update(chamadoBanco);
+            _context.SaveChanges();
+            
+            return RedirectToAction(nameof(Index));
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> MeusChamadosTecnico()

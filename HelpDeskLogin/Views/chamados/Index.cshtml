@@ -10,7 +10,7 @@
 <a asp-action="Create">Novo</a>
 
 <div class="col-md-12">
-    
+
     <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked">
             <li><a asp-action="Index">Todos Chamados</a></li>
@@ -19,7 +19,7 @@
 
         </ul>
     </div>
-    
+
     <div class="col-md-10">
         <table class="table">
             <thead>
@@ -60,41 +60,42 @@
             <tbody>
                 @foreach (var item in Model.ListaChamados)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.idChamado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DH_Abertura)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.descricao)
-                    </td>
-                    <td>
-                        @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
-                    </td>
-                    <td>
-                        @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
-                    </td>
-                    <td>
-                        @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
-                    </td>
-                    <td>
-                        @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
-                    </td>
-                    <td>
-                       @ControllerHelper.RecuperaNomeClinica(item.UsuarioId)
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idChamado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DH_Abertura)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descricao)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
+                        </td>
+                        <td>
+                            @ControllerHelper.RecuperaNomeClinica(item.UsuarioId)
+                        </td>
 
-                    <td>
-                        @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
-                        <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
-                    </td>
-                </tr>
+                        <td>
+                            @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
+                            <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-id="@item.gruposId" data-chamado="@item.idChamado" data-grupo="@ControllerHelper.RecuperarNomeGrupo(item.gruposId)" data-target="#alterarGrupo">Alterar Grupo</button>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -102,4 +103,67 @@
 
 
 </div>
+
+
+<!-- Modal Alterar Grupo  -->
+<div class="modal fade" id="alterarGrupo" tabindex="-1" role="dialog" aria-labelledby="alterarGrupo" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alterar Grupo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("AlterarGrupo", "chamados", FormMethod.Post))
+            {
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(model => model.idChamado)
+
+                <div class="row">
+                    <div class="col-md-12">
+                        Grupo atual:
+                        <input id="grupo" disabled="disabled" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        Novo Grupo:
+                        <dropdrown-grupo asp-for="gruposId" id="gruposId" name="gruposId"></dropdrown-grupo>
+                    </div>
+                </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $('#alterarGrupo').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var idGrupo = button.data('id')
+            var grupoNome = button.data('grupo')
+            var idChamado = button.data('chamado')
+// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            //modal.find('#gruposId').val(idGrupo)
+            modal.find('#grupo').val(grupoNome)
+            modal.find('#idChamado').val(idChamado)
+        })
+
+    </script>
+}
+
+
+
 
