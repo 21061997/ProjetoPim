@@ -33,6 +33,24 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contatos</a></li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                                
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               Opções de Adminitrador
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a>
+                                <a asp-area="" asp-controller="grupos" asp-action="">grupos</a>
+                                <a asp-area="" asp-controller="categorias" asp-action="">categorias</a>
+                                <a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a> 
+                            </div>
+                       
+                    }
+
+
                     <!--<li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>-->
                     <!--<li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>-->
                     <!--<li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>-->
