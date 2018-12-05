@@ -37,17 +37,50 @@
                     @if (User.IsInRole("Admin"))
                     {
 
-                                
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Opções de Adminitrador
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a>
-                                <a asp-area="" asp-controller="grupos" asp-action="">grupos</a>
-                                <a asp-area="" asp-controller="categorias" asp-action="">categorias</a>
-                                <a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a> 
-                            </div>
-                       
+
+
+                    <span class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                            Opções de Administrador
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown  dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>
+                            <li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>
+                            <li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>
+                            <li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="CreateFuncionario"> Cadastrar Funcionario</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="CreateUsuario"> Cadastrar Usuario</a></li>
+
+                        </ul>
+                    </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     }
 
 
