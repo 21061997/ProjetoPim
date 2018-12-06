@@ -3,7 +3,7 @@
     ViewData["Title"] = "Criar Usuario";
 }
 
-<h2>CreateFuncionario</h2>
+<h2>Criar Usuário</h2>
 
 
 @{
@@ -13,7 +13,7 @@
 }
 
 
-<h4>Funcionario</h4>
+<h4>Usuário</h4>
 <hr />
 <div class="row">
     <div class="col-md-12" id="conteudo" style="font-size: 15px;">
@@ -57,14 +57,14 @@
 
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Usuarios">Back to List</a>
+    <a asp-area="" asp-controller="Home" asp-action="index">Voltar</a>
 </div>
 
 @section Scripts {

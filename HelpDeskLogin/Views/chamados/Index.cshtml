@@ -5,11 +5,27 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
+
 <h2>Index</h2>
 
-<a asp-action="Create">Novo</a>
 
-<div class="col-md-12">
+        @if (User.IsInRole("Admin")) // Se for o adminitrador que estiver logado não vai pode abrir chamado 
+        {
+
+
+        }
+        else
+        {
+            <a asp-action="Create">Novo Chamado</a>
+
+        }
+
+<div class="col-md-12" id="conteudo" style="font-size: 15px;">
 
     <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked">
@@ -90,7 +106,7 @@
                             @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
                         </td>
                         <td>
-                            <button class="btn btn-default" values="Editar" ><a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> </button><br />
+                            <button class="btn btn-default" values="Editar"><a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> </button><br />
                             <button class="btn btn-default"> <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a></button> <br />
                             <button class="btn btn btn-default"><a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a></button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-id="@item.gruposId" data-chamado="@item.idChamado" data-grupo="@ControllerHelper.RecuperarNomeGrupo(item.gruposId)" data-target="#alterarGrupo">Alterar Grupo</button>
@@ -117,25 +133,25 @@
             </div>
             @using (Html.BeginForm("AlterarGrupo", "chamados", FormMethod.Post))
             {
-            <div class="modal-body">
+                <div class="modal-body">
 
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-                @Html.HiddenFor(model => model.idChamado)
+                    @Html.HiddenFor(model => model.idChamado)
 
-                <div class="row">
-                    <div class="col-md-12">
-                        Grupo atual:
-                        <input id="grupo" disabled="disabled" class="form-control">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Grupo atual:
+                            <input id="grupo" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            Novo Grupo:
+                            <dropdrown-grupo asp-for="gruposId" id="gruposId" name="gruposId"></dropdrown-grupo>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        Novo Grupo:
-                        <dropdrown-grupo asp-for="gruposId" id="gruposId" name="gruposId"></dropdrown-grupo>
-                    </div>
-                </div>
-            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -153,13 +169,54 @@
             var idGrupo = button.data('id')
             var grupoNome = button.data('grupo')
             var idChamado = button.data('chamado')
-// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             //modal.find('#gruposId').val(idGrupo)
             modal.find('#grupo').val(grupoNome)
             modal.find('#idChamado').val(idChamado)
         })
+
+
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
 }

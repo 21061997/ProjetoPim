@@ -4,62 +4,119 @@
     ViewData["Title"] = "Index";
 }
 
+
+
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
+
+
+
+
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nova Clinica</a>
 </p>
-<table class="table">
+<table class="table" id="conteudo" style="font-size: 15px;">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.telefone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.cep)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.logradouro)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.bairro)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.uf)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.cidade)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.uf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cidade)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.logradouro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.uf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cidade)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.idClinica">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idClinica">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idClinica">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.logradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cidade)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.idClinica">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.idClinica">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.idClinica">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+}
+

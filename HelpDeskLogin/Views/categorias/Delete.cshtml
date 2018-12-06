@@ -4,13 +4,20 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
 
-<h3>Are you sure you want to delete this?</h3>
+
+<h2>Deletar</h2>
+
+<h3>Tem certeza de que deseja excluir essa categoria ?</h3>
 <div>
     <h4>categorias</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" id="conteudo" style="font-size: 15px;">
         <dt>
             @Html.DisplayNameFor(model => model.categoria)
         </dt>
@@ -30,10 +37,45 @@
             @Html.DisplayFor(model => model.ativo)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="idCategoria" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Deletar" class="btn btn-primary" /> |
+        <a asp-action="Index">Voltar a Lista</a>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
+
+}
+
+

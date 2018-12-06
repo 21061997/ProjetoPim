@@ -4,12 +4,21 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+
+
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
+
+
+<h2>Editar Clínica</h2>
 
 <h4>Clinicas</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12" id="conteudo" style="font-size: 15px;">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="idClinica" />
@@ -44,16 +53,48 @@
                 <span asp-validation-for="cidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar a Lista</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
+
+
+
+
+
 }

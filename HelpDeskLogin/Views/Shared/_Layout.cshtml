@@ -30,56 +30,27 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <!--<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>-->
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contatos</a></li>
+                    <li><a asp-area="" asp-controller="chamados" asp-action="">chamados</a></li>
 
                     @if (User.IsInRole("Admin"))
                     {
 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Opções de Administrador<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>
+                                <li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>
+                                <li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>
+                                <li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="CreateFuncionario"> Cadastrar Funcionario</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="CreateUsuario"> Cadastrar Usuario</a></li>
 
-
-                    <span class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-                            Opções de Administrador
-                            <span class="caret"></span>
-                        </button>
-
-                        <ul class="dropdown  dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                            <li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>
-                            <li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>
-                            <li><a asp-area="" asp-controller="categorias" asp-action="">categorias</a></li>
-                            <li><a asp-area="" asp-controller="prioridades" asp-action=""> prioridades</a></li>
-                            <li><a asp-area="" asp-controller="Account" asp-action="CreateFuncionario"> Cadastrar Funcionario</a></li>
-                            <li><a asp-area="" asp-controller="Account" asp-action="CreateUsuario"> Cadastrar Usuario</a></li>
-
-                        </ul>
-                    </span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            </ul>
+                        </li>
 
                     }
 
@@ -89,7 +60,6 @@
                     <!--<li><a asp-area="" asp-controller="grupos" asp-action="">grupos</a></li>-->
                     <!--<li><a asp-area="" asp-controller="logs" asp-action="">logs</a></li>-->
                     <!--<li><a asp-area="" asp-controller="comentarios" asp-action="">comentarios</a></li>-->
-                    <li><a asp-area="" asp-controller="chamados" asp-action="">chamados</a></li>
                     <!--<li><a asp-area="" asp-controller="Arquivos" asp-action="">Arquivos</a></li>-->
                     <!--<li><a asp-area="" asp-controller="Clinicas" asp-action="">Clinicas</a></li>-->
                 </ul>

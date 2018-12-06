@@ -4,44 +4,90 @@
     ViewData["Title"] = "Index";
 }
 
+
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
+
+
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar novo grupo</a>
 </p>
-<table class="table">
+<table class="table" id="conteudo" style="font-size: 15px;">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.grupo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.descricao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ativo)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grupo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ativo)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.grupo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.idGrupo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idGrupo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idGrupo">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.grupo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ativo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.idGrupo">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.idGrupo">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.idGrupo">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
+
+}
+
+

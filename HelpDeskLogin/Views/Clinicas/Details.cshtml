@@ -4,12 +4,23 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+
+
+@{
+    <input type="button" class="btn btn-primary" value="+" onclick="fonte('a');" />
+    <input type="button" class="btn btn-primary" value="-" onclick="fonte('b');" />
+    <input type="hidden" id="backup" />
+}
+
+
+
+
+<h2>Detalhes</h2>
 
 <div>
-    <h4>Clinicas</h4>
+    <h4>Clínicas</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" id="conteudo" style="font-size: 15px;">
         <dt>
             @Html.DisplayNameFor(model => model.telefone)
         </dt>
@@ -49,6 +60,54 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.idClinica">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.idClinica">Editar</a> |
+    <a asp-action="Index">Voltar a lista</a>
 </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript">
+
+        /* Função para acessibilidade */
+        function fonte(e) {
+
+            var elemento = document.getElementById("conteudo");// Recebendo o Id da div
+            var atual = elemento.style.fontSize; // identificando a fonte
+
+
+
+            if (e == 'a') {
+
+                atual = parseInt(atual) + 15 + 'px'; // Calculo de tamanho de fonte
+            } else if (e == 'b') {
+                atual = parseInt(atual) - 15 + 'px';
+
+            } else if (e == 'c') {
+                elemento.style.fontSize = atual;
+
+            }
+            elemento.style.fontSize = atual;
+
+        }
+
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
