@@ -10,6 +10,11 @@ namespace HelpDeskLogin.Models
 {
     public class chamados
     {
+        public chamados()
+        {
+            Comentario = new comentarios();
+        }
+
         [Key]
         [Display(Name = "Numero")]
         public int idChamado { get; set; }
@@ -78,6 +83,10 @@ namespace HelpDeskLogin.Models
         public IEnumerable<Arquivos> ListaArquivos { get; set; }
         [NotMapped]
         public IEnumerable<chamados> ListaChamados { get; set; }
+        [NotMapped]
+        public IEnumerable<comentarios> ListaComentario { get; set; }
+        [NotMapped]
+        public comentarios Comentario { get; set; }
 
 
 

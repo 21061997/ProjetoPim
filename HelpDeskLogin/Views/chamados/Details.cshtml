@@ -73,6 +73,21 @@
             <a href="@Url.Action("BaixarAnexo", "chamados", new { id = arquivo.idArquivo })" class="btn btn-xs btn-mini btn-primary"><i class="fa fa-download"></i> Baixar anexo</a>
         }
 
+        <form asp-action="Comentario" enctype="multipart/form-data">
+            <label>Comentario:</label>
+
+            @Html.HiddenFor(model => model.Comentario.chamdosId)
+            @Html.TextAreaFor(model => model.Comentario.comentario, new {@class="form-control"})
+            <br />
+            <button class="btn btn-success" type="submit">Enviar Comentario</button>
+        </form>
+        
+        @foreach (var comentario in Model.ListaComentario)
+        {
+            <p>@comentario.comentario</p>
+            <p>Em: @comentario.DHComentario</p>
+        }
+
     </dl>
 </div>
 <div>

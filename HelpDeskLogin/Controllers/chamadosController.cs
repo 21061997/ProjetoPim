@@ -40,31 +40,35 @@ namespace HelpDeskLogin.Controllers
         }
 
         // GET: chamados/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public  ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
             
-            var chamados = await _context.Chamados   
+            var chamados =  _context.Chamados   
                 .Include(c => c.categorias)
                 .Include(c => c.comentarios)
                 .Include(c => c.grupos)
                 .Include(c => c.logs)
                 .Include(c => c.prioridades)
                 .Include(c=> c.arquivos)
-                .SingleOrDefaultAsync(m => m.idChamado == id);
+                .SingleOrDefault(m => m.idChamado == id);
 
-            var listaArquivos = await _context.Arquivos.Where(m => m.chamdosId == id).ToListAsync();
+            var listaArquivos =  _context.Arquivos.Where(m => m.chamdosId == id).ToList();
             chamados.ListaArquivos = listaArquivos;
+
+            var listaComentarios = _context.Comentarios.Where(x => x.chamdosId == id);
+            chamados.ListaComentario = listaComentarios;
+            chamados.Comentario.chamdosId = (int)id;
 
             if (chamados == null)
             {
                 return NotFound();
             }
 
-            return View(chamados);
+            return View("Details",chamados);
         }
 
         // GET: chamados/Create
@@ -340,6 +344,21 @@ namespace HelpDeskLogin.Controllers
 
 
             return View(model);
+        }
+
+        [HttpPost]
+        public  ActionResult Comentario(comentarios comentario)
+        {
+            comentario.DHComentario = DateTime.Now;
+
+            _context.Comentarios.Add(comentario);
+            _context.SaveChanges();
+
+
+
+           // return await Details(comentario.chamdosId);
+           // return  Details(comentario.chamdosId);
+            return RedirectToAction("Details", new {id = comentario.chamdosId});
         }
 
 
