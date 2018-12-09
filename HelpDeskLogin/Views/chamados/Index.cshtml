@@ -76,42 +76,46 @@
             <tbody>
                 @foreach (var item in Model.ListaChamados)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.idChamado)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DH_Abertura)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.descricao)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperaNomeClinica(item.UsuarioId)
-                        </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idChamado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DH_Abertura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperaNomeClinica(item.UsuarioId)
+                    </td>
 
-                        <td>
-                            @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
-                        </td>
-                        <td>
-                            <button class="btn btn-default" values="Editar"><a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> </button><br />
-                            <button class="btn btn-default"> <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a></button> <br />
-                            <button class="btn btn btn-default"><a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-id="@item.gruposId" data-chamado="@item.idChamado" data-grupo="@ControllerHelper.RecuperarNomeGrupo(item.gruposId)" data-target="#alterarGrupo">Alterar Grupo</button>
-                        </td>
-                    </tr>
+                    <td>
+                        @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DH_Fechamento)
+                    </td>
+                    <td>
+                        <button class="btn btn-default" values="Editar"><a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> </button><br />
+                        <button class="btn btn-default"> <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a></button> <br />
+                        <button class="btn btn btn-default"><a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a></button>
+                        <button class="btn btn btn-default"><a asp-action="finalizarChamado" asp-route-id="@item.idChamado">Finalizar</a></button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-id="@item.gruposId" data-chamado="@item.idChamado" data-grupo="@ControllerHelper.RecuperarNomeGrupo(item.gruposId)" data-target="#alterarGrupo">Alterar Grupo</button>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

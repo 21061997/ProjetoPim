@@ -275,6 +275,26 @@ namespace HelpDeskLogin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public async Task<IActionResult> finalizarChamado(int id)
+        {
+
+             var chamado = await _context.Chamados.FirstOrDefaultAsync(x => x.idChamado == id);
+            chamado.DH_Fechamento = DateTime.Now;
+            _context.Chamados.Update(chamado);
+            _context.SaveChanges();
+
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> AlterarGrupo(chamados chamado)
         {
