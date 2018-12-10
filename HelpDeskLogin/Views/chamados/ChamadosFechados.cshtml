@@ -59,34 +59,39 @@
             <tbody>
                 @foreach (var item in Model.ListaChamados)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DH_Abertura)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.descricao)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
-                        </td>
-                        <td>
-                            @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
-                            <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
-                            <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DH_Abertura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </td>
+
+                    <td>
+                        @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DH_Fechamento)
+                    </td>
+
+                    <td>
+                        @ControllerHelper.RecuperarNomeGrupo(item.gruposId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
+                    </td>
+                    <td>
+                        @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a> |
+                        <a asp-action="AssinarChamado" asp-route-id="@item.idChamado">Assinar</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
