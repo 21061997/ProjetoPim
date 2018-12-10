@@ -60,6 +60,10 @@
                         @Html.DisplayNameFor(model => model.prioridades)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.status)
+                    </th>
+
+                    <th>
                         Usuario
                     </th>
                     <th>
@@ -86,6 +90,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.descricao)
                     </td>
+
                     <td>
                         @ControllerHelper.RecuperaNomeCategoria(item.categoriasId)
                     </td>
@@ -94,6 +99,9 @@
                     </td>
                     <td>
                         @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
                     </td>
                     <td>
                         @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
@@ -105,6 +113,8 @@
                     <td>
                         @ControllerHelper.RecuperarNomeFuncionario(item.FuncionarioId)
                     </td>
+
+
                     <td>
                         <button class="btn btn-default" values="Editar"><a asp-action="Edit" asp-route-id="@item.idChamado">Editar</a> </button><br />
                         <button class="btn btn-default"> <a asp-action="Details" asp-route-id="@item.idChamado">Detalhes</a></button> <br />

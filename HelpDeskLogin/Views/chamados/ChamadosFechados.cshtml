@@ -46,6 +46,9 @@
                     </th>
 
                     <th>
+                        @Html.DisplayNameFor(model => model.status)
+                    </th>
+                    <th>
                         Usuario
                     </th>
                     <th>
@@ -80,6 +83,11 @@
                     <td>
                         @ControllerHelper.RecuperarNomePrioridade(item.prioridadesId)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+
+
                     <td>
                         @ControllerHelper.RecuperarNomeUsuario(item.UsuarioId)
                     </td>

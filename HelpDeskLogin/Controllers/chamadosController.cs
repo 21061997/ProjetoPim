@@ -110,9 +110,9 @@ namespace HelpDeskLogin.Controllers
                     var usuario = await _context.Usuario.FirstOrDefaultAsync(x => x.PessoaId == user.Id);
                     chamados.UsuarioId = usuario.IdUsuario;
                 }
-                
 
 
+                chamados.status = "Aberto";
                 chamados.DH_Abertura = DateTime.Now;
                 _context.Add(chamados);
                 await _context.SaveChangesAsync();
@@ -264,9 +264,12 @@ namespace HelpDeskLogin.Controllers
             var usuario = await _context.Funcionario.FirstOrDefaultAsync(x => x.PessoaId == user.Id);
 
             var chamado = await _context.Chamados.FirstOrDefaultAsync(x => x.idChamado == id);
+            chamado.status = "Andamento";
             chamado.FuncionarioId = usuario.IdFuncionario;
             _context.Chamados.Update(chamado);
             _context.SaveChanges();
+
+            
 
             //registra log da alteração
             logsController logs = new logsController(_context);
@@ -284,10 +287,11 @@ namespace HelpDeskLogin.Controllers
         {
 
              var chamado = await _context.Chamados.FirstOrDefaultAsync(x => x.idChamado == id);
+            chamado.status = "Resolvido";
             chamado.DH_Fechamento = DateTime.Now;
             _context.Chamados.Update(chamado);
             _context.SaveChanges();
-
+            
 
 
             return RedirectToAction(nameof(Index));
@@ -327,11 +331,13 @@ namespace HelpDeskLogin.Controllers
 
             var chamados = _context.Chamados.Where(x => x.FuncionarioId == funcionario.IdFuncionario).AsQueryable();
 
+             
             var model = new chamados();
             model.ListaChamados = chamados;
 
-
+           
             return View(model);
+            
         }
 
         public async Task<IActionResult> ChamadosFechados()

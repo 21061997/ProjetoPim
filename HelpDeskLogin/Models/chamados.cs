@@ -47,8 +47,15 @@ namespace HelpDeskLogin.Models
         /*Fazendo a associação de categorias*/
 
         public int categoriasId { get; set; }
-        [Display(Name = "Comentario")]
+        [Display(Name = "Categoria")]
         public categorias categorias { get; set; }
+
+        
+        public string status { get; set; }
+        [Display(Name = "Status")]
+
+
+
 
         /*Fazendo a associação de comentarios*/
 
